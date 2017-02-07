@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var port = 8000;
 
-var server = app.listen(process.env.OPENSHIFT_NODEJS_PORT, process.env.OPENSHIFT_NODEJS_IP);
+var server = require('http').Server(app);
 
 app.use(express.static('public'));
 
@@ -11,7 +11,7 @@ var socket = require('socket.io');
 var io = socket(server);
 
 io.sockets.on('connection', newConnection);
-
+server.listen(process.env.OPENSHIFT_NODEJS_PORT, process.env.OPENSHIFT_NODEJS_IP);
 
 function newConnection(socket) {
 	console.log('connection: ' +socket.id);
