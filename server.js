@@ -5,7 +5,7 @@ var port = 8000;
 var server = require('http').Server(app);
 
 app.use(express.static('public'));
-
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8000);  
 var socket = require('socket.io');
 
 var io = socket(server);
