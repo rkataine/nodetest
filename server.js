@@ -1,8 +1,8 @@
 var express = require('express');
 var app = express();
-var port = 80;
+var port = 8000;
 
-var server = app.listen(port);
+var server = app.listen(process.env.OPENSHIFT_NODEJS_PORT, process.env.OPENSHIFT_NODEJS_IP);
 
 app.use(express.static('public'));
 

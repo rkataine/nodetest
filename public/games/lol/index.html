@@ -17,7 +17,7 @@
 		
 	<div class = "container">
 		<script>
-		var socket = io.connect('http://espotdev-espotdev.44fs.preview.openshiftapps.com:80');
+		var socket = io.connect('http://espotdev-espotdev.44fs.preview.openshiftapps.com:8000/', {'forceNew':true});
 		socket.on('filereturn', createContentButtons);
 		</script>
 		<div class = "sidebar">				
