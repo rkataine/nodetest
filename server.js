@@ -1,17 +1,16 @@
 var express = require('express');
 var app = express();
-var port = 8000;
 
-var server = require('http').Server(app);
+var server = app.listen(3000);
 
 app.use(express.static('public'));
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8000);  
+
 var socket = require('socket.io');
 
 var io = socket(server);
 
 io.sockets.on('connection', newConnection);
-server.listen(port);
+
 
 function newConnection(socket) {
 	console.log('connection: ' +socket.id);
