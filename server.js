@@ -1,15 +1,20 @@
-var express = require('express');
+var express = require('express')
 var app = express();
-
-var server = app.listen(3000);
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.use(express.static('public'));
 
-var socket = require('socket.io');
-
-var io = socket(server);
-
 io.sockets.on('connection', newConnection);
+
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
+var ip = process.env.OPENSHIFT_NODEJS_IP;
+
+http.listen(port, ip, function() {
+	console.log("Server started.");
+}); 
+
 
 
 function newConnection(socket) {
