@@ -17,10 +17,14 @@ function newConnection(socket) {
 	socket.on('mainfetch', message);
 	
 	function message(data){
-		console.log(data);
+		console.log(socket.id);
 		var result = getAllFilesFromFolder('public/' +data);
-		//socket.broadcast.emit('filereturn', result);
-		io.sockets.emit('filereturn', result);
+		//socket.broadcast.emit('filereturn', result);  // including itself
+		//io.sockets.emit('filereturn', result);
+		if(io.sockets.connected[socket.id]) {
+			io.sockets.connected[socket.id].emit('filereturn', result);
+		}
+		
 	}
 }
 
