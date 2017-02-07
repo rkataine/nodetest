@@ -11,7 +11,7 @@ var socket = require('socket.io');
 var io = socket(server);
 
 io.sockets.on('connection', newConnection);
-server.listen(process.env.OPENSHIFT_NODEJS_PORT, process.env.OPENSHIFT_NODEJS_IP);
+server.listen(port);
 
 function newConnection(socket) {
 	console.log('connection: ' +socket.id);
